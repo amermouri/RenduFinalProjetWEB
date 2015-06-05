@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="file:///home/amermouri/Documents/3TC/WEB/Projet/back/Essai avec nouveau formulaire/static/img/favicon.ico">
+
+    <title>WorldWild TC - Dépôt</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="#top"  >WorldWild TC</a>
+            </li>
+            <li>
+                <div id="UserLogMenu"></div>
+            </li>
+            <li>
+                <a href="accueil.html">Accueil</a>
+            </li>
+            <li>
+                <a href="about.html">A propos</a>
+            </li>
+            <li>
+                <a href="ressources.html">Ressources</a>
+                <ul>
+					<li><a href="3TC.html">3TC</a></li>
+					<li><a href="4TC.html">4TC</a></li>
+					<li><a href="5TC.html">5TC</a></li>
+					<li><a href="upload.html">Déposer un fichier</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="astus.html">@STUS</a>
+                
+                <ul>
+					<li><a href="bts.html">Behind the scenes</a></li>
+                </ul>
+            </li>
+            <li>
+                <a id="logOut" onclick="Deconnexion()">Déconnexion</a>
+            </li>
+        </ul>
+        
+        <form class="navbar-form">
+            <font color="#82CAFA">
+            <div id="profile"></div>
+            </font>
+        </form>
+        
+    </nav>
+
+    <!-- Header -->
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h1>Dépôt d'un fichier</h1>
+            <br>
+        </div>
+    </header>
+
+    <!-- Menu -->
+    <section id="services" class="services bg-primary">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="row" align="left">
+						
+						
+				 		<form role="form" id="THEFORM" method="post" enctype="multipart/form-data">
+					    	
+					    	<br>
+					    	
+					    	<label for="typeRessourceL">Type de ressource</label>
+						      	<select class="form-control" id="typeRessource">
+						      		<option id="anneeChoose" value="info">Type de ressource...</option>
+							        <option value="DS">DS</option>
+							        <option value="TD">TD</option>
+							        <option value="TP">TP</option>
+							        <option value="Projet">Projet</option>
+							        <option value="Autre">Autre</option>
+						      	</select>
+							<br>
+						    
+						    
+						    <label for="sel1">Année</label>
+						      	<select class="form-control" onChange="choisir()" id="annee">
+						      		<option value="infoAnnee">Année...</option>
+							        <option value="3TC">3TC</option>
+							        <option value="4TC">4TC</option>
+							        <option value="5TC">5TC</option>
+						      	</select>
+							<br>
+							
+							<label for="sel1">Matière</label>
+						      	<select class="form-control" name="select4" id="matiere">
+						      		<option value="infoMatiere">Matière...</option>
+						      	</select>
+							<br>
+  							<button type="button" class="btn btn-success" id = "button" onClick="add_ressource()">Envoyer</button>
+					    	
+						</form>
+						<br><br>
+						
+						<form action="upload" method="post" enctype="multipart/form-data">
+								<p><input type="file" name="file" accept="file_extension|image/*|media_type">
+								<br>
+															<input type="hidden" name="ll" id="llh">
+															<input type="hidden" name="mm" id="mmh">
+															<input type="hidden" name="pp" id="pph">
+
+								   <button type="submit" value="Upload" class="btn btn-success">Charger</button>
+					   </form>
+						
+						
+												
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/code.js"></script>
+    <script src="js/deconnexion.js"></script>
+    <script src="js/utilisateur.js"></script>
+    
+    <!-- Formulaire -->
+    <script type="text/javascript">
+ 
+		function choisir()
+		{
+		 var liste = document.getElementById("annee");
+		 var numero = liste.selectedIndex;
+		 var valeur = liste.options[numero].value;
+		 var div = document.getElementById("matiere");
+		 var select1 = '<select name="select1"><option value="AGP">AGP</option><option value="ATP">ATP</option><option value="ELP">ELP</option><option value="MAS">MAS</option><option value="NET">NET</option><option value="PBS">PBS</option><option value="SDE">SDE</option><option value="TCM">TCM</option><option value="TSA">TSA</option><option value="WEB">WEB</option></select>' 
+		 var select2 = '<select name="select2"><option value="ARM">ARM</option><option value="ASP">ASP</option><option value="FIN">FIN</option><option value="MACIF">MACIF</option> <option value="MACR">MACR</option><option value="MACT">MACT</option><option value="MGL">MGL</option><option value="MID">MID</option><option value="PRS">PRS</option><option value="SEC">SEC</option><option value="TIP">TIP</option><option value="WCO">WCO</option></select>'
+		 var select3 = '<select name="select3"><option value="4G">4G</option><option value="ARS">ARS</option><option value="AVI">AVI</option><option value="BAN">BAN</option><option value="BED">BED</option><option value="MOB">MOB</option><option value="NOC">NOC</option><option value="RTR">RTR</option><option value="SAT">SAT</option><option value="SEC">SEC</option><option value="TR-CVDI">TR-CVDI</option><option value="VSR">VSR</option></select>' 
+		 var select4 = '<select name="select4"><option value="matiereChoose">Matière</option></select>'
+					
+		   if(valeur == "3TC")
+		   {
+		   div.innerHTML = select1
+		   }
+		   if(valeur == "4TC")
+		   {
+		   div.innerHTML = select2
+		   }
+		   if(valeur == "5TC")
+		   {
+		   div.innerHTML = select3
+		   }
+		   if(valeur == "infoAnnee")
+		   {
+		   div.innerHTML = select4
+		   }
+		}
+	</script>
+
+    <!-- Custom Theme JavaScript -->
+    <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Scrolls to the selected menu item on the page
+    $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                }
+            }
+        });
+    });
+    </script>
+
+</body>
+
+</html>
+
